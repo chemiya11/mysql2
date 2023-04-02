@@ -1,15 +1,38 @@
 require("dotenv").config();
 const express = require("express");
-const mysql = require("mysql2");
-const conn = require("express-myconnection");
+
 const route = require("./routes/index");
+const cors = require('cors')
+const port = ( 3000)
 
 const app = express();
 const PORT = process.env.PORT ;
 
-app.use(express.json());
-app.use("/", route);
+global.__basedir = __dirname;
+app.use(express.json())
+app.use(cors())
+app.use(express.urlencoded({ extended: true }));
 
-app.listen(PORT, () => {
-  console.log(`server running on port ${PORT}`);
-});
+app.use(express.static("frontend"));
+app.use('/api', route)
+
+app.listen(PORT,(error)=>{
+  if(error)
+  {console.log('error al iniciar el servidor: '+error)}
+  else{
+      console.log('servidor iniciado en el prueto: '+PORT)
+  }
+})
+
+
+
+/***************************** */
+
+
+
+
+
+
+
+
+

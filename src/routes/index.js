@@ -1,18 +1,29 @@
-const express = require("express");
-const route = express.Router();
-const {
-  getAll
- /* getOne,
-  create,
-  update,
-  deleteItem*/
-} = require("../controllers/index");
 
-route.get("/getAll", getAll);
-/*
-route.get("/getOne/:value", getOne);
-route.post("/create", create);
-route.put("/update/:value", update);
-route.delete("/delete/:value", deleteItem);*/
+const controllerUsuario = require("../controllers/usuario.controller");
 
-module.exports = route;
+const router = require('express').Router()
+
+
+
+
+
+
+//npm install --save jsonwebtoken bcrypt cookie-parser
+
+
+
+
+
+/************usuario */
+
+
+router.post('/usuarios/identificacion', controllerUsuario.identificacion);
+router.post('/usuarios/registro', controllerUsuario.registro);
+router.delete('/usuarios/:id', controllerUsuario.eliminarUsuario);
+router.get('/usuarios',controllerUsuario.buscarUsuarios);
+router.get('/usuarios/repetidos',controllerUsuario.comprobarRepetido);
+router.put("/usuarios/:id", controllerUsuario.actualizarUsuario);
+router.get('/usuarios/:id',controllerUsuario.buscarUsuarioPorId);
+
+
+module.exports = router
